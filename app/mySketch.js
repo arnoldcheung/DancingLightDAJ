@@ -11,6 +11,7 @@ let elementName; // element name Div element
 // buttons ----------------------------------------------------------------------------------------
 let generateButton;
 let fontButton;
+
 let nextElementButton;
 let hideShowButton; // the button toggle that turns the controlPanel on & off (will rename)
 let captureButton;
@@ -21,10 +22,18 @@ let translateButton;
 let mainCanvas;
 let puntoGraphics;
 let starsGraphics;
-let orbitGraphics;
-let energyGraphics;
-let radiationGraphics;
-// let waveGraphics;
+let infinityGraphics;
+
+let brushGraphics;
+
+let brushGraphics1;
+let brushGraphics2;
+let brushGraphics3;
+
+
+let waveGraphics;
+
+
 let buttonMenuDiv;
 
 let buttonMenuHeight = 70;
@@ -35,7 +44,6 @@ let bottomBannerGraphics;
 let signature = false;
 
 // punto variables ----------------------------------------------------------------------------------------
-var initial_punto_r;
 var punto_r;
 
 // flag that checks if the art is generated or modified ----------------------------------------------------------------------------------------
@@ -46,36 +54,44 @@ let universeNumber;
 
 // sliders ----------------------------------------------------------------------------------------
 
-let sliderIntroText;
+let sliderIntroText; // adjust the composition
 
 let sliderSpacing = 40;
 
-let size_slider;
+let puntoSizeSlider;
+let roundnessSlider;
+let infinityNumSlider;
+let infinityWidthSlider;
+let waveHeightSlider;
 
-let energySizeSlider;
+// let size_slider;
 
-// let waveFrequencySlider;
-let energyHeightSlider;
+// let energySizeSlider;
 
-let orbit_speed_slider;
+// // let waveFrequencySlider;
+// let energyHeightSlider;
 
-let radiationSizeSlider
+// let orbit_speed_slider;
+
+// let radiationSizeSlider
 
 // Checkboxes ----------------------------------------------------------------------------------------
 let puntoCheckbox;
-let orbitCheckbox;
-let energyCheckbox;
-let radiationCheckbox
+let roundnessCheckbox;
+let infinityCheckbox;
+let brushCheckbox;
+let waveCheckbox;
+
+// let puntoCheckbox;
+// let orbitCheckbox;
+// let energyCheckbox;
+// let radiationCheckbox
 // let waveCheckbox;
 
 // text inputs ----------------------------------------------------------------------------------------
 let nameInput;
 let messageInput;
 let numberInput;
-
-// energy variables ----------------------------------------------------------------------------------------
-let growSize; // spped of the energy shapes grow
-let layerSize; // thickness of the energy
 
 // font ----------------------------------------------------------------------------------------
 let fonts = [
@@ -95,31 +111,37 @@ let myMessage = '';
 
 // color selection toggle ----------------------------------------------------------------------------------------
 
-let colorList = ['#021E3A', // bg
-				'#FFFFFF', // stars
-				'#FF6400', // Punto
-				'#DBFF26', // energy 1
-				'#3DE049', // energy 2
-				'#FFFFFF', // orbit
-				'#AEF064', // radiation
-				'#FFFFFF'] // signature
+let colorList = [
+	'#e3e1d3', // bg
+	'#FFFFFF', // stars
+	'#FF6400', // Punto
+	'#0032C9', // Infinity
+	'#3DE049', // Wave
+	'#000000'] // signature
 
-let colorNameList = ['Space',
-					'Stars',
-					'Punto',
-					'Energy 1',
-					'Energy 2',
-					'Vitality',
-					'Radiation', 
-					'Signature'];
+let colorNameList = [
+	'Space',
+	'Stars',
+	'Punto',
+	'Light',
+	'Wave',
+	'Signature'];
 
 let numSelectableColors = colorList.length;
 let currentColorSelectionIndex = 0;
 
 
-// orbit variable ----------------------------------------------------------------------------------------
-const numCircles = 1200;
-let circleData = [];
+// // orbit variable ----------------------------------------------------------------------------------------
+// const numCircles = 1200;
+// let circleData = [];
+
+// infinity variables ----------------------------------------------------------------------------------------
+let infinityWidth;
+let numBrush;
+let roundness;
+
+// wave variables ----------------------------------------------------------------------------------------
+let waveHeight;
 
 
 // mgm logo
@@ -144,8 +166,8 @@ function setup() {
 	mainCanvas = createGraphics(width, height);
 	mainCanvas.angleMode(DEGREES);
 	
-	// create orbit cancvas ----------------------------------------------------------------------------------------
-	setupOrbit();
+	// // create orbit cancvas ----------------------------------------------------------------------------------------
+	// setupOrbit();
 	
 	// Create punto grapghics ----------------------------------------------------------------------------------------
 	setupPunto();
@@ -153,14 +175,18 @@ function setup() {
 	// Create scatter grapghics ----------------------------------------------------------------------------------------
 	setupStars();
 	
-	// Create energy grapghics ----------------------------------------------------------------------------------------
-	setupEnergy();
+	// // Create energy grapghics ----------------------------------------------------------------------------------------
+	// setupEnergy();
 	
 	// Create wave grapghics ----------------------------------------------------------------------------------------
-	// setupWaves();	
+	setupWaves();	
 	
 	// Create radiation graphics ----------------------------------------------------------------------------------------
 	setupRadiation();
+	
+	// Create brushStroke graphics ----------------------------------------------------------------------------------------
+	setupBrushStroke();
+	
 	
 	// Setup control panel ----------------------------------------------------------------------------------------
 	setupControlPanel();
@@ -188,27 +214,21 @@ function setup() {
 }
 
 function draw() {
- 	clear(); // reset base canvas
+	clear(); // reset base canvas
 	mainCanvas.background(colorList[0]); // reset background
-	orbitGraphics.clear();  // reset orbit
-	radiationGraphics.clear();  // reset radiation
-	// waveGraphics.clear();  // reset wave
+	puntoGraphics.clear();
+	waveGraphics.clear();  // reset wave
+	// infinityGraphics.clear(); // reset infinity
 	
 	// get values from sliders ----------------------------------------------------------------------------------------
-	layerSize = energySizeSlider.value();
-	
-	stroke_w = energySizeSlider.value();
-	
-	// waveFrequency = waveFrequencySlider.value();
-	energyHeight = energyHeightSlider.value();
 		
-	size_slider.input(() => {
-    punto_r = size_slider.value();
-  });
-	
-	radiationSize = radiationSizeSlider.value();
-	
-	orbit_speed = orbit_speed_slider.value();
+    punto_r = puntoSizeSlider.value();
+	numBrush = infinityNumSlider.value();
+	roundness = roundnessSlider.value();
+	waveHeight = waveHeightSlider.value();
+	// infinityWidth = infinityWidthSlider.value();
+
+
 	
 	// Star grapghics ----------------------------------------------------------------------------------------
 
@@ -217,22 +237,22 @@ function draw() {
 	mainCanvas.image(starsGraphics, 0, 0);
 	mainCanvas.pop();
 	
-	// // wave grapghics ----------------------------------------------------------------------------------------
+	// wave grapghics ----------------------------------------------------------------------------------------
 	// if(waveCheckbox.checked()){
-	// 	drawWave();
-	// 	mainCanvas.image(waveGraphics, 0, 0);	
+	drawWave();
+	mainCanvas.image(waveGraphics, 0, 0);	
 	// }
 	
-	// radiation graphics ----------------------------------------------------------------------------------------
-	if(radiationSize > 0.1){
-		drawRadiation();
-		mainCanvas.push();
-		mainCanvas.imageMode(CENTER);
-		mainCanvas.translate(width / 2, height / 2);
-		mainCanvas.rotate(frameCount * 0.2);
-		mainCanvas.image(radiationGraphics, 0, 0); // the triangles
-		mainCanvas.pop();
-	}
+	// // radiation graphics ----------------------------------------------------------------------------------------
+	// if(radiationSize > 0.1){
+	// 	drawRadiation();
+	// 	mainCanvas.push();
+	// 	mainCanvas.imageMode(CENTER);
+	// 	mainCanvas.translate(width / 2, height / 2);
+	// 	mainCanvas.rotate(frameCount * 0.2);
+	// 	mainCanvas.image(radiationGraphics, 0, 0); // the triangles
+	// 	mainCanvas.pop();
+	// }
 	
 	// punto graphics ----------------------------------------------------------------------------------------
 	// if(puntoCheckbox.checked()){
@@ -240,31 +260,32 @@ function draw() {
 	mainCanvas.image(puntoGraphics, 0, 0); // the circle
 	// }
 
-	
-	// Orbit graphics ----------------------------------------------------------------------------------------
-	if(orbit_speed > -5){
-		drawOrbit();
-		mainCanvas.push();
-		mainCanvas.tint(colorList[5]);
-		mainCanvas.image(orbitGraphics, 0, 0); // the orbit
-		mainCanvas.pop();
+	// infinity graphics ----------------------------------------------------------------------------------------
+	// if(infinityCheckbox.checked()){
+	mainCanvas.push();		
+	mainCanvas.tint(colorList[3]);
+
+	if(numBrush >= 1){
+		mainCanvas.image(brushGraphics1, 0, 0, mainCanvas.width, mainCanvas.height);
 	}
 	
-	// energy graphics ----------------------------------------------------------------------------------------
-	if(energyHeight > -600){
-		drawEnergy();
-		mainCanvas.push();
-		mainCanvas.translate(width / 2, height / 2);
-		mainCanvas.translate(0, energyHeight);
-		mainCanvas.rotate(-135);
-		mainCanvas.image(energyGraphics, 0, 0); // the radiating squares
-		mainCanvas.pop();
+	if(numBrush >= 2){
+		mainCanvas.image(brushGraphics2, 0, 0, mainCanvas.width, mainCanvas.height);
 	}
+	
+	if(numBrush >= 3){
+		mainCanvas.image(brushGraphics3, 0, 0, mainCanvas.width, mainCanvas.height);
+	}
+
+	mainCanvas.pop();
+	// }
+
+
 	
 	// signature ----------------------------------------------------------------------------------------
 	if(signature){
 		mainCanvas.push();
-		mainCanvas.fill(colorList[7]);
+		mainCanvas.fill(colorList[5]);
 		mainCanvas.textFont(currentFont);
 		mainCanvas.textAlign(RIGHT, BOTTOM);
 		mainCanvas.textSize(20);
@@ -273,11 +294,10 @@ function draw() {
 	}
 
 	// Message ----------------------------------------------------------------------------------------
-	// displayMessageWithLineBreaks(myMessage);
 
 	mainCanvas.push();
 	// mainCanvas.rectMode(CORNERS);
-	mainCanvas.fill(colorList[7]);
+	mainCanvas.fill(colorList[5]);
 	mainCanvas.textFont(currentFont);
 	mainCanvas.textAlign(RIGHT, TOP);
 	mainCanvas.textSize(30);
@@ -288,7 +308,7 @@ function draw() {
 	
 	if(generated){
 		mainCanvas.push();
-		mainCanvas.fill(colorList[7]);
+		mainCanvas.fill(colorList[5]);
 		mainCanvas.textFont(currentFont);
 		mainCanvas.textAlign(CENTER, BOTTOM);
 		mainCanvas.textSize(20);

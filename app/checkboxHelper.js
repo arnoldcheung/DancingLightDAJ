@@ -16,25 +16,24 @@ function checkboxSetup(){
 
 	// test.....................................................................................
 	puntoCheckbox = createDiv('Punto');
-	orbitCheckbox = createDiv('Vitality');
-	energyCheckbox = createDiv('Energy');
-	movementCheckbox = createDiv('Movement');
-	radiationCheckbox = createDiv('Radiation');
+	roundnessCheckbox = createDiv('Energy');
+	brushCheckbox = createDiv('Movement');
+	waveCheckbox = createDiv('Vitality');
+	// radiationCheckbox = createDiv('Radiation');
 	
 	// checkbox parent
 	puntoCheckbox.parent(controlPanel);
-	orbitCheckbox.parent(controlPanel);
-	energyCheckbox.parent(controlPanel);
-	movementCheckbox.parent(controlPanel);
-	radiationCheckbox.parent(controlPanel);
+	roundnessCheckbox.parent(controlPanel);
+	brushCheckbox.parent(controlPanel);
+	waveCheckbox.parent(controlPanel);
+	// radiationCheckbox.parent(controlPanel);
 	// waveCheckbox.parent(controlPanel);
 
 	puntoCheckbox.addClass('controlPanelText');
-	puntoCheckbox.addClass('controlPanelText');
-	orbitCheckbox.addClass('controlPanelText');
-	energyCheckbox.addClass('controlPanelText');
-	movementCheckbox.addClass('controlPanelText');
-	radiationCheckbox.addClass('controlPanelText');
+	roundnessCheckbox.addClass('controlPanelText');
+	brushCheckbox.addClass('controlPanelText');
+	waveCheckbox.addClass('controlPanelText');
+	// radiationCheckbox.addClass('controlPanelText');
 
 	resetCheckboxes();
 
@@ -61,17 +60,17 @@ function resetCheckboxes(){
 	sliderIntroText.position(iroPickerDiv.x, iroPickerDiv.y + parseFloat(iroPickerDiv.style('height')) + 15);	
 
 	puntoCheckbox.html(getTranslation('elementList')[0]);
-	orbitCheckbox.html(getTranslation('elementList')[3]);
-	energyCheckbox.html(getTranslation('elementList')[1]);
-	movementCheckbox.html(getTranslation('elementList')[2]);
-	radiationCheckbox.html(getTranslation('elementList')[4]);
+	roundnessCheckbox.html(getTranslation('elementList')[1]);
+	brushCheckbox.html(getTranslation('elementList')[2]);
+	waveCheckbox.html(getTranslation('elementList')[3]);
+	// radiationCheckbox.html(getTranslation('elementList')[4]);
 	
 	puntoCheckbox.position(iroPickerDiv.x, sliderIntroText.y + 35);	// this position here controls all the checkbox / sliders' position relative this this
 	// puntoCheckbox.position(iroPickerDiv.x, iroPickerDiv.y + parseFloat(iroPickerDiv.style('height')) + 20);	// this position here controls all the checkbox / sliders' position relative this this
-	energyCheckbox.position(puntoCheckbox.x, puntoCheckbox.y + sliderSpacing);
-	movementCheckbox.position(puntoCheckbox.x, puntoCheckbox.y + 2 * sliderSpacing);
-	orbitCheckbox.position(energyCheckbox.x, puntoCheckbox.y + 3 * sliderSpacing);
-	radiationCheckbox.position(energyCheckbox.x, puntoCheckbox.y + 4 * sliderSpacing);
+	roundnessCheckbox.position(puntoCheckbox.x, puntoCheckbox.y + sliderSpacing);
+	brushCheckbox.position(puntoCheckbox.x, puntoCheckbox.y + 2 * sliderSpacing);
+	waveCheckbox.position(puntoCheckbox.x, puntoCheckbox.y + 3 * sliderSpacing);
+	// radiationCheckbox.position(energyCheckbox.x, puntoCheckbox.y + 4 * sliderSpacing);
 	// waveCheckbox.position(energyCheckbox.x, puntoCheckbox.y + 5 * sliderSpacing);
 
 	// puntoCheckbox.checked(true);

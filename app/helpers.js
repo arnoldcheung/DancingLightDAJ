@@ -41,7 +41,7 @@ function setColor(){
 	punto_r = 10;
 	
 	// not set generated flag to false if it is for signature
-	if(currentColorSelectionIndex != 7) { 
+	if(currentColorSelectionIndex != 5) { 
 		generated = false;
 	}
 }
@@ -197,12 +197,12 @@ async function captureCanvas(){
 	}
 }
 
-// resets punto, (can remove) ----------------------------------------------------------------------------------------
+// // resets punto, (can remove) ----------------------------------------------------------------------------------------
 
-function resetPunto(){
-	puntoGraphics.clear();
-	punto_r = initial_punto_r;
-}
+// function resetPunto(){
+// 	puntoGraphics.clear();
+// 	punto_r = initial_punto_r;
+// }
 
 // resets the entire sketch ----------------------------------------------------------------------------------------
 
@@ -211,15 +211,12 @@ function resetUniverse() {
 	// reset colors
 
 	colorList = [
-		'#021E3A', // bg
+		'#e3e1d3', // bg
 		'#FFFFFF', // stars
 		'#FF6400', // Punto
-		'#DBFF26', // energy 1
-		'#3DE049', // energy 2
-		'#FFFFFF', // orbit
-		'#AEF064', // radiation
-		'#FF8AFF', // wave
-		'#FFFFFF'] // signature
+		'#0032C9', // Infinity
+		'#3DE049', // Wave
+		'#000000'] // signature
 
 	currentColorSelectionIndex = 0;
 
@@ -234,13 +231,14 @@ function resetUniverse() {
 	mainCanvas.background(colorList[0]);
 	starsGraphics.clear();
 	puntoGraphics.clear();
-	orbitGraphics.clear();
-	energyGraphics.clear();
-	radiationGraphics.clear();
+	waveGraphics.clear();
+	// orbitGraphics.clear();
+	// energyGraphics.clear();
+	// radiationGraphics.clear();
 	// waveGraphics.clear();
 	// bottomBannerGraphics.clear();
 
-	punto_r = initial_punto_r;
+	// punto_r = initial_punto_r;
 
 
 
@@ -249,9 +247,11 @@ function resetUniverse() {
 	mainCanvas.resizeCanvas(width, height);
 	starsGraphics.resizeCanvas(width, height);
 	puntoGraphics.resizeCanvas(width, height);
-	orbitGraphics.resizeCanvas(width, height);
-	energyGraphics.resizeCanvas(min(width, height), min(width, height));
-	radiationGraphics.resizeCanvas(max(width, height), max(width, height));
+	waveGraphics.resizeCanvas(width, height);
+
+	// orbitGraphics.resizeCanvas(width, height);
+	// energyGraphics.resizeCanvas(min(width, height), min(width, height));
+	// radiationGraphics.resizeCanvas(max(width, height), max(width, height));
 	// waveGraphics.resizeCanvas(width, height);
 	bottomBannerGraphics.resizeCanvas(width, buttonMenuHeight)
 
@@ -272,5 +272,6 @@ function resetUniverse() {
 
 
 	// change element name back to space (colorList[0])
+	// elementName.html(colorNameList[currentColorSelectionIndex]);
 	// elementName.html(colorNameList[currentColorSelectionIndex]);
 }
