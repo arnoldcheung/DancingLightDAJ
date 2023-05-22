@@ -216,6 +216,14 @@ function setup() {
 function draw() {
 	clear(); // reset base canvas
 	mainCanvas.background(colorList[0]); // reset background
+
+	mainCanvas.push();
+	mainCanvas.blendMode(SCREEN);
+	mainCanvas.fill(255, 255, 255, 240);
+	mainCanvas.rect(0, 0, width, height);
+	mainCanvas.blendMode(BLEND);
+	mainCanvas.pop();
+	
 	puntoGraphics.clear();
 	waveGraphics.clear();  // reset wave
 	// infinityGraphics.clear(); // reset infinity

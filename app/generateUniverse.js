@@ -79,7 +79,7 @@ function generateInfinity(numberArray){
 	
 	// infinity Number
 	let infinityNumberPair = parseInt(numberArray[1] + numberArray[2], 10);
-	infinityNumSlider.value(floor(map(infinityNumberPair, 0, 99, 1, 4)));
+	infinityNumSlider.value(floor(map(infinityNumberPair, 0, 99, 0, 4)));
 
 	// // infinity Width
 	// let infinityWidthPair = parseInt(numberArray[5] + numberArray[7], 10);

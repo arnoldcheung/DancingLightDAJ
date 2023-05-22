@@ -54,7 +54,7 @@ function sliderSetup(){
 	//slider definition
 	puntoSizeSlider = createSlider(width * 0.1, width * 0.9, width * 0.7, 1);
 	roundnessSlider = createSlider(0, 50, 50, 1);
-	infinityNumSlider = createSlider(1, 3, 3, 1);
+	infinityNumSlider = createSlider(0, 3, 3, 1);
 	// infinityWidthSlider = createSlider(50, 250, 100, 1);
 	waveHeightSlider = createSlider(10, waveGraphics.height * 0.9, waveGraphics.height * 0.6, 1);
 	
