@@ -118,7 +118,7 @@ function radiationEvent(){
 
 function signatureEvent(){
 	currentColorSelectionIndex = 5;
-	elementName.html(colorNameList[currentColorSelectionIndex]);
+	elementName.html(getTranslation('colorNameList')[currentColorSelectionIndex]);
 	elementName.style('color', colorList[currentColorSelectionIndex]);
 
 	signature = false;
@@ -126,6 +126,6 @@ function signatureEvent(){
 
 function messageEvent(){
 	currentColorSelectionIndex = 5;
-	elementName.html(colorNameList[currentColorSelectionIndex]);
+	elementName.html(getTranslation('colorNameList')[currentColorSelectionIndex]);
 	elementName.style('color', colorList[currentColorSelectionIndex]);
 }

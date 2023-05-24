@@ -119,8 +119,15 @@ function sliderSetup(){
 // }
 
 function resetSliders(){
+	
+	let longestName;
+	if(currentLanguage == 'en'){
+		longestName = waveCheckbox;
+	} else if (currentLanguage == 'zh'){
+		longestName = puntoCheckbox;
+	}
 
-	puntoSizeSlider.position(puntoCheckbox.x + parseFloat(brushCheckbox.style('width')) + 10, puntoCheckbox.y);
+	puntoSizeSlider.position(longestName.x + parseFloat(longestName.style('width')) + 10, puntoCheckbox.y);
 	roundnessSlider.position(puntoSizeSlider.x, roundnessCheckbox.y);
 	infinityNumSlider.position(puntoSizeSlider.x, brushCheckbox.y);
 	// infinityWidthSlider.position(puntoSizeSlider.x, infinityCheckbox.y + sliderSpacing);
