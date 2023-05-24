@@ -270,6 +270,8 @@ function resetUniverse() {
 	// waveGraphics.resizeCanvas(width, height);
 	bottomBannerGraphics.resizeCanvas(width, buttonMenuHeight)
 
+	resetBottomBanner();
+
 	// re-setup the star graphics
 	drawStars(2000, {minSize: 1, maxSize: 5, canvas: starsGraphics, colorMode: 'mono'});
 	drawStars(2000, {minSize: 1, maxSize: 3, canvas: overlayStarsGraphics, colorMode: 'mono'});
