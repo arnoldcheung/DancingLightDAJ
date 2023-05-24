@@ -26,7 +26,7 @@ function setupNameInput(){
   });
 
 	nameInput.input(sanitizeNameInput);
-	nameInput.touchStarted(signatureEvent);
+	// nameInput.touchStarted(signatureEvent);
 	nameInput.mouseClicked(signatureEvent);
 
 
@@ -39,7 +39,7 @@ function setupNameInput(){
   // fontButton.style('font-size', '16px');
   fontButton.position(nameInput.x + nameInput.width + 20, nameInput.y - fontButton.height / 2);
   fontButton.mouseClicked(toggleFontSelection);
-  fontButton.touchEnded(toggleFontSelection);
+  // fontButton.touchEnded(toggleFontSelection);
 }
 
 
