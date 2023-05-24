@@ -106,7 +106,7 @@ function generateWave(numberArray){
 	
 	// wave color
 	let hexColor = numArrayToHex(numberArray, [5, 0, 4, 2, 6, 7]);
-	hexColor = modifyRGBwithHSB(hexColor, [0, 360], [0, 100], [0, 100]);
+	hexColor = modifyRGBwithHSB(hexColor, [0, 360], [60, 100], [40, 100]);
 	colorList[5] = hexColor;
 	
 	// wave frequency
