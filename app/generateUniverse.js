@@ -45,6 +45,17 @@ function generateStars(numberArray){
 	let hexColor = numArrayToHex(numberArray, [5, 4, 3, 1, 7, 6]);
 	hexColor = modifyRGBwithHSB(hexColor, [0, 360], [50, 100], [0, 100]);
 	colorList[1] = hexColor;
+
+	// Punto roundness
+	let chiAlphaPair = parseInt(numberArray[4] + numberArray[0], 10);
+	chiSlider.value(map(chiAlphaPair, 0, 99, 255, 0))	
+}
+
+// Generate Stars Function ----------------------------------------------------------------------------------------
+function generateChi(numberArray){
+	let hexColor = numArrayToHex(numberArray, [0, 6, 7, 2, 1, 5]);
+	hexColor = modifyRGBwithHSB(hexColor, [0, 360], [50, 100], [0, 100]);
+	colorList[2] = hexColor;
 }
 
 // Generate Punto Function ----------------------------------------------------------------------------------------
@@ -56,7 +67,7 @@ function generatePunto(numberArray){
 	// punto color
 	let hexColor = numArrayToHex(numberArray, [2, 7, 3, 5, 1, 4]);
 	hexColor = modifyRGBwithHSB(hexColor, [0, 360], [0, 100], [0, 100]);
-	colorList[2] = hexColor;
+	colorList[3] = hexColor;
 	
 	// Punto Size
 	let puntoSizePair = parseInt(numberArray[0] + numberArray[3], 10);
@@ -75,7 +86,7 @@ function generateInfinity(numberArray){
 	// infinty color
 	let hexColor = numArrayToHex(numberArray, [4, 1, 0, 2, 3, 5]);
 	hexColor = modifyRGBwithHSB(hexColor, [360, 0], [100, 50], [100, 50]);
-	colorList[3] = hexColor;
+	colorList[4] = hexColor;
 	
 	// infinity Number
 	let infinityNumberPair = parseInt(numberArray[1] + numberArray[2], 10);
@@ -96,11 +107,11 @@ function generateWave(numberArray){
 	// wave color
 	let hexColor = numArrayToHex(numberArray, [5, 0, 4, 2, 6, 7]);
 	hexColor = modifyRGBwithHSB(hexColor, [0, 360], [0, 100], [0, 100]);
-	colorList[4] = hexColor;
+	colorList[5] = hexColor;
 	
 	// wave frequency
 	let waveHeightPair = parseInt(numberArray[4] + numberArray[6], 10);
-	waveHeightSlider.value(map(waveHeightPair, 0, 99, 10, waveGraphics.height * 0.9));
+	waveHeightSlider.value(map(waveHeightPair, 0, 99, -10, waveGraphics.height * 0.9));
 }
 
 // num input to hex color helper function ----------------------------------------------------------------------------------------

@@ -19,8 +19,9 @@ const translations = {
         exhibitionTitle: "《超元‧萬象: 蕭勤的藝術》‘To Infinity and Beyond: The Art of Hsiao Chin’ ",
 
         colorNameList: [
-          'Space',
-          'Stars',
+          'Earth',
+          'Chi 1',
+          'Chi 2',
           'Punto',
           'Light',
           'Heaven',
@@ -30,7 +31,8 @@ const translations = {
             'Punto',
             'Tao',
             'Light',
-            'Heaven'],
+            'Heaven',
+            'Chi'],
     },
 
 
@@ -54,8 +56,9 @@ const translations = {
         exhibitionTitle: "《超元‧萬象: 蕭勤的藝術》‘To Infinity and Beyond: The Art of Hsiao Chin’",
 
         colorNameList: [
-          '宇宙',
-          '炁',
+          '地',
+          '炁 1',
+          '炁 2',
           '庞图',
           '靈光',
           '天',
@@ -65,7 +68,8 @@ const translations = {
             '龐圖',
             '道',
             '靈光',
-            '天'],
+            '天',
+            '炁'],
     },
   };
   

@@ -19,6 +19,8 @@ function checkboxSetup(){
 	roundnessCheckbox = createDiv('Energy');
 	brushCheckbox = createDiv('Movement');
 	waveCheckbox = createDiv('Vitality');
+	chiCheckbox = createDiv('Chi');
+
 	// radiationCheckbox = createDiv('Radiation');
 	
 	// checkbox parent
@@ -26,6 +28,7 @@ function checkboxSetup(){
 	roundnessCheckbox.parent(controlPanel);
 	brushCheckbox.parent(controlPanel);
 	waveCheckbox.parent(controlPanel);
+	chiCheckbox.parent(controlPanel);
 	// radiationCheckbox.parent(controlPanel);
 	// waveCheckbox.parent(controlPanel);
 
@@ -33,6 +36,7 @@ function checkboxSetup(){
 	roundnessCheckbox.addClass('controlPanelText');
 	brushCheckbox.addClass('controlPanelText');
 	waveCheckbox.addClass('controlPanelText');
+	chiCheckbox.addClass('controlPanelText')
 	// radiationCheckbox.addClass('controlPanelText');
 
 	resetCheckboxes();
@@ -63,6 +67,8 @@ function resetCheckboxes(){
 	roundnessCheckbox.html(getTranslation('elementList')[1]);
 	brushCheckbox.html(getTranslation('elementList')[2]);
 	waveCheckbox.html(getTranslation('elementList')[3]);
+	chiCheckbox.html(getTranslation('elementList')[4]);
+
 	// radiationCheckbox.html(getTranslation('elementList')[4]);
 	
 	puntoCheckbox.position(iroPickerDiv.x, sliderIntroText.y + 35);	// this position here controls all the checkbox / sliders' position relative this this
@@ -70,6 +76,8 @@ function resetCheckboxes(){
 	roundnessCheckbox.position(puntoCheckbox.x, puntoCheckbox.y + sliderSpacing);
 	brushCheckbox.position(puntoCheckbox.x, puntoCheckbox.y + 2 * sliderSpacing);
 	waveCheckbox.position(puntoCheckbox.x, puntoCheckbox.y + 3 * sliderSpacing);
+	chiCheckbox.position(puntoCheckbox.x, puntoCheckbox.y + 4 * sliderSpacing);
+
 	// radiationCheckbox.position(energyCheckbox.x, puntoCheckbox.y + 4 * sliderSpacing);
 	// waveCheckbox.position(energyCheckbox.x, puntoCheckbox.y + 5 * sliderSpacing);
 
@@ -81,33 +89,33 @@ function resetCheckboxes(){
 	// waveCheckbox.checked(false);
 }
 
-function puntoEvent(){
-	currentColorSelectionIndex = 2;
-	elementName.html(colorNameList[currentColorSelectionIndex]);
-	elementName.style('color', colorList[currentColorSelectionIndex]);
-	generated = false;
-}
+// function puntoEvent(){
+// 	currentColorSelectionIndex = 2;
+// 	elementName.html(colorNameList[currentColorSelectionIndex]);
+// 	elementName.style('color', colorList[currentColorSelectionIndex]);
+// 	generated = false;
+// }
 
-function energyEvent(){
-	currentColorSelectionIndex = 3;
-	elementName.html(colorNameList[currentColorSelectionIndex]);
-	elementName.style('color', colorList[currentColorSelectionIndex]);
-	generated = false;
-}
+// function energyEvent(){
+// 	currentColorSelectionIndex = 3;
+// 	elementName.html(colorNameList[currentColorSelectionIndex]);
+// 	elementName.style('color', colorList[currentColorSelectionIndex]);
+// 	generated = false;
+// }
 
-function orbitEvent(){
-	currentColorSelectionIndex = 5;
-	elementName.html(colorNameList[currentColorSelectionIndex]);
-	elementName.style('color', colorList[currentColorSelectionIndex]);
-	generated = false;
-}
+// function orbitEvent(){
+// 	currentColorSelectionIndex = 5;
+// 	elementName.html(colorNameList[currentColorSelectionIndex]);
+// 	elementName.style('color', colorList[currentColorSelectionIndex]);
+// 	generated = false;
+// }
 
-function radiationEvent(){
-	currentColorSelectionIndex = 6;
-	elementName.html(colorNameList[currentColorSelectionIndex]);
-	elementName.style('color', colorList[currentColorSelectionIndex]);
-	generated = false;
-}
+// function radiationEvent(){
+// 	currentColorSelectionIndex = 6;
+// 	elementName.html(colorNameList[currentColorSelectionIndex]);
+// 	elementName.style('color', colorList[currentColorSelectionIndex]);
+// 	generated = false;
+// }
 
 // function WaveEvent(){
 // 	currentColorSelectionIndex = 7;
@@ -117,7 +125,7 @@ function radiationEvent(){
 // }
 
 function signatureEvent(){
-	currentColorSelectionIndex = 5;
+	currentColorSelectionIndex = 6;
 	elementName.html(getTranslation('colorNameList')[currentColorSelectionIndex]);
 	elementName.style('color', colorList[currentColorSelectionIndex]);
 
@@ -125,7 +133,7 @@ function signatureEvent(){
 }
 
 function messageEvent(){
-	currentColorSelectionIndex = 5;
+	currentColorSelectionIndex = 6;
 	elementName.html(getTranslation('colorNameList')[currentColorSelectionIndex]);
 	elementName.style('color', colorList[currentColorSelectionIndex]);
 }

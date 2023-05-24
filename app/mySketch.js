@@ -33,6 +33,8 @@ let brushGraphics3;
 
 let waveGraphics;
 
+let overlayStarsGraphics;
+let puntoStarsGraphics;
 
 let buttonMenuDiv;
 
@@ -63,6 +65,7 @@ let roundnessSlider;
 let infinityNumSlider;
 let infinityWidthSlider;
 let waveHeightSlider;
+let chiSlider;
 
 // let size_slider;
 
@@ -81,6 +84,7 @@ let roundnessCheckbox;
 let infinityCheckbox;
 let brushCheckbox;
 let waveCheckbox;
+let chiCheckbox;
 
 // let puntoCheckbox;
 // let orbitCheckbox;
@@ -118,16 +122,18 @@ let myMessage = '';
 // color selection toggle ----------------------------------------------------------------------------------------
 
 let colorList = [
-	'#e3e1d3', // bg
-	'#FFFFFF', // stars
-	'#FF6400', // Punto
-	'#0032C9', // Infinity
-	'#3DE049', // Wave
+	'#635c47', // bg
+	'#FFFFFF', // heaven chi
+	'#43fa7a', // punto chi
+	'#5d43c4', // Punto
+	'f', // Light
+	'#f263d6', // Wave
 	'#000000'] // signature
 
 let colorNameList = [
 	'Space',
-	'Stars',
+	'Chi 1',
+	'Chi 2',
 	'Punto',
 	'Light',
 	'Wave',
@@ -261,6 +267,7 @@ function draw() {
 	numBrush = infinityNumSlider.value();
 	roundness = roundnessSlider.value();
 	waveHeight = waveHeightSlider.value();
+	chiAlpha = chiSlider.value();
 	// infinityWidth = infinityWidthSlider.value();
 
 
@@ -268,15 +275,15 @@ function draw() {
 	// Star grapghics ----------------------------------------------------------------------------------------
 
 	mainCanvas.push();
-	mainCanvas.tint(colorList[1] + '80');
+	mainCanvas.tint('#FFFFFF');
 	mainCanvas.image(starsGraphics, 0, 0);
 	mainCanvas.pop();
 	
 	// wave grapghics ----------------------------------------------------------------------------------------
-	// if(waveCheckbox.checked()){
-	drawWave();
-	mainCanvas.image(waveGraphics, 0, 0);	
-	// }
+	if(waveHeight >=10 ){
+		drawWave(chi=false);
+		mainCanvas.image(waveGraphics, 0, 0);	
+	}
 	
 	// // radiation graphics ----------------------------------------------------------------------------------------
 	// if(radiationSize > 0.1){
@@ -298,7 +305,7 @@ function draw() {
 	// infinity graphics ----------------------------------------------------------------------------------------
 	// if(infinityCheckbox.checked()){
 	mainCanvas.push();		
-	mainCanvas.tint(colorList[3]);
+	mainCanvas.tint(colorList[4]);
 
 	if(numBrush >= 1){
 		mainCanvas.image(brushGraphics1, 0, 0, mainCanvas.width, mainCanvas.height);
@@ -315,12 +322,19 @@ function draw() {
 	mainCanvas.pop();
 	// }
 
+	// Chi 2 grapghics ----------------------------------------------------------------------------------------
+	mainCanvas.push();
+	mainCanvas.tint(colorList[1] + hex(chiAlpha, 2));
+	waveGraphics.clear();
+	drawWave(chi=true);
+	mainCanvas.image(waveGraphics, 0, 0);	
+	mainCanvas.pop();	// }
 
 	
 	// signature ----------------------------------------------------------------------------------------
 	if(signature){
 		mainCanvas.push();
-		mainCanvas.fill(colorList[5]);
+		mainCanvas.fill(colorList[6]);
 		mainCanvas.textFont(currentFont);
 		mainCanvas.textAlign(RIGHT, BOTTOM);
 		mainCanvas.textSize(20);
@@ -332,7 +346,7 @@ function draw() {
 
 	mainCanvas.push();
 	// mainCanvas.rectMode(CORNERS);
-	mainCanvas.fill(colorList[5]);
+	mainCanvas.fill(colorList[6]);
 	mainCanvas.textFont(currentFont);
 	mainCanvas.textAlign(RIGHT, TOP);
 	mainCanvas.textSize(30);
@@ -343,7 +357,7 @@ function draw() {
 	
 	if(generated){
 		mainCanvas.push();
-		mainCanvas.fill(colorList[5]);
+		mainCanvas.fill(colorList[6]);
 		mainCanvas.textFont(currentFont);
 		mainCanvas.textAlign(CENTER, BOTTOM);
 		mainCanvas.textSize(20);

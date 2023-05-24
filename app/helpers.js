@@ -211,11 +211,12 @@ function resetUniverse() {
 	// reset colors
 
 	colorList = [
-		'#e3e1d3', // bg
-		'#FFFFFF', // stars
-		'#FF6400', // Punto
-		'#0032C9', // Infinity
-		'#3DE049', // Wave
+		'#635c47', // bg
+		'#FFFFFF', // heaven chi
+		'#43fa7a', // punto chi
+		'#5d43c4', // Punto
+		'#0021c4', // Light
+		'#f263d6', // Wave
 		'#000000'] // signature
 
 	currentColorSelectionIndex = 0;
@@ -229,7 +230,10 @@ function resetUniverse() {
 	// clears all the canvas and graphics
 	clear();
 	mainCanvas.background(colorList[0]);
+	// mainCanvas.clear();
 	starsGraphics.clear();
+	puntoStarsGraphics.clear();
+	overlayStarsGraphics.clear();
 	puntoGraphics.clear();
 	waveGraphics.clear();
 	// orbitGraphics.clear();
@@ -267,8 +271,10 @@ function resetUniverse() {
 	bottomBannerGraphics.resizeCanvas(width, buttonMenuHeight)
 
 	// re-setup the star graphics
-	drawStars(3000, {minSize: 1, maxSize: 5, canvas: starsGraphics});
-
+	drawStars(2000, {minSize: 1, maxSize: 5, canvas: starsGraphics, colorMode: 'mono'});
+	drawStars(2000, {minSize: 1, maxSize: 3, canvas: overlayStarsGraphics, colorMode: 'mono'});
+	drawStars(1000, {minSize: 1, maxSize: 10, canvas: overlayStarsGraphics, colorMode: 'mono'});
+	drawStars(300, {minSize: 1, maxSize: 5, canvas: puntoStarsGraphics, colorMode: 'mono'});
 
 	// reset the control panels and their buttons / sliders
 	resetControlPanel();

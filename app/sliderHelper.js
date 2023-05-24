@@ -56,7 +56,9 @@ function sliderSetup(){
 	roundnessSlider = createSlider(0, 50, 50, 1);
 	infinityNumSlider = createSlider(0, 3, 3, 1);
 	// infinityWidthSlider = createSlider(50, 250, 100, 1);
-	waveHeightSlider = createSlider(10, waveGraphics.height * 0.9, waveGraphics.height * 0.6, 1);
+	waveHeightSlider = createSlider(-10, waveGraphics.height * 0.9, waveGraphics.height * 0.6, 1);
+	chiSlider = createSlider(0, 255, 255, 1);
+
 	
 	// set slider parent and classes
 	puntoSizeSlider.parent(controlPanel);
@@ -64,12 +66,15 @@ function sliderSetup(){
 	infinityNumSlider.parent(controlPanel);
 	// infinityWidthSlider.parent(controlPanel);
 	waveHeightSlider.parent(controlPanel);
+	chiSlider.parent(controlPanel);
+
 
 	puntoSizeSlider.class('custom-slider');
 	roundnessSlider.class('custom-slider');
 	infinityNumSlider.class('custom-slider');
 	// infinityWidthSlider.class('custom-slider');
 	waveHeightSlider.class('custom-slider');
+	chiSlider.class('custom-slider');
 
 	resetSliders();
 	
@@ -89,6 +94,9 @@ function sliderSetup(){
 	
 	waveHeightSlider.touchStarted(waveSliderEvent);
 	waveHeightSlider.mousePressed(waveSliderEvent);	
+
+	chiSlider.touchStarted(chiSliderEvent);
+	chiSlider.mousePressed(chiSliderEvent);	
 }
 
 // function resetSliders(){
@@ -132,6 +140,8 @@ function resetSliders(){
 	infinityNumSlider.position(puntoSizeSlider.x, brushCheckbox.y);
 	// infinityWidthSlider.position(puntoSizeSlider.x, infinityCheckbox.y + sliderSpacing);
 	waveHeightSlider.position(puntoSizeSlider.x, waveCheckbox.y);
+	chiSlider.position(puntoSizeSlider.x, chiCheckbox.y);
+
 
 	// slider style
 	puntoSizeSlider.style('width', controlPanel.width * 0.95 - puntoSizeSlider.x + 'px');
@@ -139,6 +149,8 @@ function resetSliders(){
 	infinityNumSlider.style('width', puntoSizeSlider.style('width'));
 	// infinityWidthSlider.style('width', puntoSizeSlider.style('width'));
 	waveHeightSlider.style('width', puntoSizeSlider.style('width'));
+	chiSlider.style('width', puntoSizeSlider.style('width'));
+
 
 	// reset slider values
 
@@ -147,10 +159,11 @@ function resetSliders(){
 	infinityNumSlider.value(3);
 	// infinityWidthSlider.value(100);
 	waveHeightSlider.value(waveGraphics.height * 0.6);
+	chiSlider.value(255);
 }
 
 function puntoSliderEvent(){
-	currentColorSelectionIndex = 2;
+	currentColorSelectionIndex = 3;
 	elementName.html(getTranslation('colorNameList')[currentColorSelectionIndex]);
 	elementName.style('color', colorList[currentColorSelectionIndex]);
 	// puntoCheckbox.checked(true);
@@ -158,7 +171,7 @@ function puntoSliderEvent(){
 }
 
 function infinitySliderEvent(){
-	currentColorSelectionIndex = 3;
+	currentColorSelectionIndex = 4;
 	elementName.html(getTranslation('colorNameList')[currentColorSelectionIndex]);
 	elementName.style('color', colorList[currentColorSelectionIndex]);
 	// infinityCheckbox.checked(true);
@@ -166,7 +179,15 @@ function infinitySliderEvent(){
 }
 
 function waveSliderEvent(){
-	currentColorSelectionIndex = 4;
+	currentColorSelectionIndex = 5;
+	elementName.html(getTranslation('colorNameList')[currentColorSelectionIndex]);
+	elementName.style('color', colorList[currentColorSelectionIndex]);
+	// waveCheckbox.checked(true);
+	generated = false;
+}
+
+function chiSliderEvent(){
+	currentColorSelectionIndex = 1;
 	elementName.html(getTranslation('colorNameList')[currentColorSelectionIndex]);
 	elementName.style('color', colorList[currentColorSelectionIndex]);
 	// waveCheckbox.checked(true);
