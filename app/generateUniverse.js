@@ -44,7 +44,7 @@ function generateSpace(numberArray){
 function generateStars(numberArray){
 	let hexColor = numArrayToHex(numberArray, [5, 4, 3, 1, 7, 6]);
 	hexColor = modifyRGBwithHSB(hexColor, [0, 360], [50, 100], [0, 100]);
-	colorList[1] = hexColor;
+	waveChiColor = hexColor;
 
 	// Punto roundness
 	let chiAlphaPair = parseInt(numberArray[4] + numberArray[0], 10);
@@ -67,7 +67,7 @@ function generatePunto(numberArray){
 	// punto color
 	let hexColor = numArrayToHex(numberArray, [2, 7, 3, 5, 1, 4]);
 	hexColor = modifyRGBwithHSB(hexColor, [0, 360], [0, 100], [0, 100]);
-	colorList[3] = hexColor;
+	colorList[1] = hexColor;
 	
 	// Punto Size
 	let puntoSizePair = parseInt(numberArray[0] + numberArray[3], 10);
@@ -86,7 +86,7 @@ function generateInfinity(numberArray){
 	// infinty color
 	let hexColor = numArrayToHex(numberArray, [4, 1, 0, 2, 3, 5]);
 	hexColor = modifyRGBwithHSB(hexColor, [360, 0], [100, 50], [100, 50]);
-	colorList[4] = hexColor;
+	colorList[2] = hexColor;
 	
 	// infinity Number
 	let infinityNumberPair = parseInt(numberArray[1] + numberArray[2], 10);
@@ -107,11 +107,18 @@ function generateWave(numberArray){
 	// wave color
 	let hexColor = numArrayToHex(numberArray, [5, 0, 4, 2, 6, 7]);
 	hexColor = modifyRGBwithHSB(hexColor, [0, 360], [60, 100], [40, 100]);
-	colorList[5] = hexColor;
+	colorList[3] = hexColor;
 	
 	// wave frequency
 	let waveHeightPair = parseInt(numberArray[4] + numberArray[6], 10);
 	waveHeightSlider.value(map(waveHeightPair, 0, 99, -10, waveGraphics.height * 0.9));
+}
+
+// Generate Stars Function ----------------------------------------------------------------------------------------
+function generateChi(numberArray){
+	let hexColor = numArrayToHex(numberArray, [2, 0, 4, 5, 1, 3]);
+	hexColor = modifyRGBwithHSB(hexColor, [0, 360], [50, 100], [0, 100]);
+	colorList[4] = hexColor;
 }
 
 // num input to hex color helper function ----------------------------------------------------------------------------------------

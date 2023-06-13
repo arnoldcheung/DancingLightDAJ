@@ -3,7 +3,7 @@ function checkboxSetup(){
 	sliderIntroText = createDiv(getTranslation("adjustSliderInstruction"));
 	sliderIntroText.parent(controlPanel);
 	sliderIntroText.addClass('controlPanelText');
-	sliderIntroText.position(iroPickerDiv.x, iroPickerDiv.y + parseFloat(iroPickerDiv.style('height')) + 15);	
+	// sliderIntroText.position(iroPickerDiv.x, iroPickerDiv.y + parseFloat(iroPickerDiv.style('height')) + 15);	
 
 	//checkbox definition
 	// puntoCheckbox = createCheckbox('Punto', true);
@@ -15,6 +15,8 @@ function checkboxSetup(){
 	// signatureCheckbox = createCheckbox('Signature', false);
 
 	// test.....................................................................................
+	backgroundCheckbox = createDiv('Space');
+	
 	puntoCheckbox = createDiv('Punto');
 	roundnessCheckbox = createDiv('Energy');
 	brushCheckbox = createDiv('Movement');
@@ -24,6 +26,8 @@ function checkboxSetup(){
 	// radiationCheckbox = createDiv('Radiation');
 	
 	// checkbox parent
+	backgroundCheckbox.parent(controlPanel);
+
 	puntoCheckbox.parent(controlPanel);
 	roundnessCheckbox.parent(controlPanel);
 	brushCheckbox.parent(controlPanel);
@@ -31,6 +35,8 @@ function checkboxSetup(){
 	chiCheckbox.parent(controlPanel);
 	// radiationCheckbox.parent(controlPanel);
 	// waveCheckbox.parent(controlPanel);
+
+	backgroundCheckbox.addClass('controlPanelText');
 
 	puntoCheckbox.addClass('controlPanelText');
 	roundnessCheckbox.addClass('controlPanelText');
@@ -61,7 +67,9 @@ function checkboxSetup(){
 function resetCheckboxes(){
 
 	sliderIntroText.html(getTranslation("adjustSliderInstruction"));
-	sliderIntroText.position(iroPickerDiv.x, iroPickerDiv.y + parseFloat(iroPickerDiv.style('height')) + 15);	
+	sliderIntroText.position(numberInput.x, elementName.y + parseFloat(elementName.style('height')) + 15);	
+
+	backgroundCheckbox.html(getTranslation('elementList')[5]);
 
 	puntoCheckbox.html(getTranslation('elementList')[0]);
 	roundnessCheckbox.html(getTranslation('elementList')[1]);
@@ -71,12 +79,15 @@ function resetCheckboxes(){
 
 	// radiationCheckbox.html(getTranslation('elementList')[4]);
 	
-	puntoCheckbox.position(iroPickerDiv.x, sliderIntroText.y + 35);	// this position here controls all the checkbox / sliders' position relative this this
+	backgroundCheckbox.position(numberInput.x, sliderIntroText.y + 35);	// this position here controls all the checkbox / sliders' position relative this this
+
+
+	puntoCheckbox.position(numberInput.x, backgroundCheckbox.y + sliderSpacing);	// this position here controls all the checkbox / sliders' position relative this this
 	// puntoCheckbox.position(iroPickerDiv.x, iroPickerDiv.y + parseFloat(iroPickerDiv.style('height')) + 20);	// this position here controls all the checkbox / sliders' position relative this this
-	roundnessCheckbox.position(puntoCheckbox.x, puntoCheckbox.y + sliderSpacing);
-	brushCheckbox.position(puntoCheckbox.x, puntoCheckbox.y + 2 * sliderSpacing);
-	waveCheckbox.position(puntoCheckbox.x, puntoCheckbox.y + 3 * sliderSpacing);
-	chiCheckbox.position(puntoCheckbox.x, puntoCheckbox.y + 4 * sliderSpacing);
+	roundnessCheckbox.position(puntoCheckbox.x, backgroundCheckbox.y + 2 * sliderSpacing);
+	brushCheckbox.position(puntoCheckbox.x, backgroundCheckbox.y + 3 * sliderSpacing);
+	waveCheckbox.position(puntoCheckbox.x, backgroundCheckbox.y + 4 * sliderSpacing);
+	chiCheckbox.position(puntoCheckbox.x, backgroundCheckbox.y + 5 * sliderSpacing);
 
 	// radiationCheckbox.position(energyCheckbox.x, puntoCheckbox.y + 4 * sliderSpacing);
 	// waveCheckbox.position(energyCheckbox.x, puntoCheckbox.y + 5 * sliderSpacing);
@@ -125,7 +136,7 @@ function resetCheckboxes(){
 // }
 
 function signatureEvent(){
-	currentColorSelectionIndex = 6;
+	currentColorSelectionIndex = 5;
 	elementName.html(getTranslation('colorNameList')[currentColorSelectionIndex]);
 	elementName.style('color', colorList[currentColorSelectionIndex]);
 
@@ -133,7 +144,7 @@ function signatureEvent(){
 }
 
 function messageEvent(){
-	currentColorSelectionIndex = 6;
+	currentColorSelectionIndex = 5;
 	elementName.html(getTranslation('colorNameList')[currentColorSelectionIndex]);
 	elementName.style('color', colorList[currentColorSelectionIndex]);
 }

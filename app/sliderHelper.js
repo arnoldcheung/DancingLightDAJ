@@ -52,6 +52,8 @@
 
 function sliderSetup(){
 	//slider definition
+	backgroundSlider = createSlider(0, 255, 255, 1);
+
 	puntoSizeSlider = createSlider(width * 0.1, width * 0.9, width * 0.7, 1);
 	roundnessSlider = createSlider(0, 50, 50, 1);
 	infinityNumSlider = createSlider(0, 3, 3, 1);
@@ -61,6 +63,8 @@ function sliderSetup(){
 
 	
 	// set slider parent and classes
+	backgroundSlider.parent(controlPanel);
+	
 	puntoSizeSlider.parent(controlPanel);
 	roundnessSlider.parent(controlPanel);
 	infinityNumSlider.parent(controlPanel);
@@ -68,6 +72,8 @@ function sliderSetup(){
 	waveHeightSlider.parent(controlPanel);
 	chiSlider.parent(controlPanel);
 
+
+	backgroundSlider.class('custom-slider');
 
 	puntoSizeSlider.class('custom-slider');
 	roundnessSlider.class('custom-slider');
@@ -80,6 +86,10 @@ function sliderSetup(){
 	
 	
 	// slider events
+
+	backgroundSlider.touchStarted(backgroundSliderEvent);
+	backgroundSlider.mousePressed(backgroundSliderEvent);
+
 	puntoSizeSlider.touchStarted(puntoSliderEvent);
 	puntoSizeSlider.mousePressed(puntoSliderEvent);
 
@@ -135,24 +145,29 @@ function resetSliders(){
 		longestName = puntoCheckbox;
 	}
 
-	puntoSizeSlider.position(longestName.x + parseFloat(longestName.style('width')) + 10, puntoCheckbox.y);
-	roundnessSlider.position(puntoSizeSlider.x, roundnessCheckbox.y);
-	infinityNumSlider.position(puntoSizeSlider.x, brushCheckbox.y);
+	backgroundSlider.position(longestName.x + parseFloat(longestName.style('width')) + 10, backgroundCheckbox.y);
+
+	puntoSizeSlider.position(backgroundSlider.x, puntoCheckbox.y);
+	roundnessSlider.position(backgroundSlider.x, roundnessCheckbox.y);
+	infinityNumSlider.position(backgroundSlider.x, brushCheckbox.y);
 	// infinityWidthSlider.position(puntoSizeSlider.x, infinityCheckbox.y + sliderSpacing);
-	waveHeightSlider.position(puntoSizeSlider.x, waveCheckbox.y);
-	chiSlider.position(puntoSizeSlider.x, chiCheckbox.y);
+	waveHeightSlider.position(backgroundSlider.x, waveCheckbox.y);
+	chiSlider.position(backgroundSlider.x, chiCheckbox.y);
 
 
 	// slider style
-	puntoSizeSlider.style('width', controlPanel.width * 0.95 - puntoSizeSlider.x + 'px');
-	roundnessSlider.style('width', puntoSizeSlider.style('width'));
-	infinityNumSlider.style('width', puntoSizeSlider.style('width'));
+	backgroundSlider.style('width', controlPanel.width * 0.9 - backgroundSlider.x + 'px');
+
+	puntoSizeSlider.style('width', backgroundSlider.style('width'));
+	roundnessSlider.style('width', backgroundSlider.style('width'));
+	infinityNumSlider.style('width', backgroundSlider.style('width'));
 	// infinityWidthSlider.style('width', puntoSizeSlider.style('width'));
-	waveHeightSlider.style('width', puntoSizeSlider.style('width'));
-	chiSlider.style('width', puntoSizeSlider.style('width'));
+	waveHeightSlider.style('width', backgroundSlider.style('width'));
+	chiSlider.style('width', backgroundSlider.style('width'));
 
 
 	// reset slider values
+	backgroundSlider.value(255);
 
 	puntoSizeSlider.value(width * 0.7);
 	roundnessSlider.value(50);
@@ -162,36 +177,63 @@ function resetSliders(){
 	chiSlider.value(255);
 }
 
+function backgroundSliderEvent(){
+	currentColorSelectionIndex = 0;
+	elementName.html(getTranslation('colorNameList')[currentColorSelectionIndex]);
+	elementName.style('color', colorList[currentColorSelectionIndex]);
+	// energyCheckbox.checked(true);
+	generated = false;
+
+	resetCurrentSelected();
+	backgroundSlider.addClass('current-selected');
+}
+
 function puntoSliderEvent(){
-	currentColorSelectionIndex = 3;
+	currentColorSelectionIndex = 1;
 	elementName.html(getTranslation('colorNameList')[currentColorSelectionIndex]);
 	elementName.style('color', colorList[currentColorSelectionIndex]);
 	// puntoCheckbox.checked(true);
 	generated = false;
+
+	resetCurrentSelected();
+	puntoSizeSlider.addClass('current-selected');
+	roundnessSlider.addClass('current-selected');
 }
 
 function infinitySliderEvent(){
-	currentColorSelectionIndex = 4;
+	currentColorSelectionIndex = 2;
 	elementName.html(getTranslation('colorNameList')[currentColorSelectionIndex]);
 	elementName.style('color', colorList[currentColorSelectionIndex]);
 	// infinityCheckbox.checked(true);
 	generated = false;
+	
+	resetCurrentSelected();
+	infinityNumSlider.addClass('current-selected');
+
 }
 
 function waveSliderEvent(){
-	currentColorSelectionIndex = 5;
+	currentColorSelectionIndex = 3;
 	elementName.html(getTranslation('colorNameList')[currentColorSelectionIndex]);
 	elementName.style('color', colorList[currentColorSelectionIndex]);
 	// waveCheckbox.checked(true);
 	generated = false;
+
+	resetCurrentSelected();
+	waveHeightSlider.addClass('current-selected');
+
 }
 
 function chiSliderEvent(){
-	currentColorSelectionIndex = 1;
+	currentColorSelectionIndex = 4;
 	elementName.html(getTranslation('colorNameList')[currentColorSelectionIndex]);
 	elementName.style('color', colorList[currentColorSelectionIndex]);
 	// waveCheckbox.checked(true);
 	generated = false;
+
+	resetCurrentSelected();
+	chiSlider.addClass('current-selected');
+
 }
 
 

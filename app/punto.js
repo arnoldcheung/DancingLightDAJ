@@ -12,7 +12,7 @@ function setupPunto(){
 }
 
 function drawPunto(){
-	puntoGraphics.fill(colorList[3]);
+	puntoGraphics.fill(colorList[1]);
 	puntoGraphics.noStroke();	
 	// puntoGraphics.ellipse(puntoGraphics.width / 2, puntoGraphics.height / 2, punto_r)
 	
@@ -27,7 +27,7 @@ function drawPunto(){
 	puntoGraphics.rect(punto_r,  puntoGraphics.height * 0.8, sinVal * 100, sinVal * 100, roundness);
 	puntoGraphics.drawingContext.clip();
 	puntoGraphics.imageMode(CENTER);
-	puntoGraphics.tint(colorList[2]);
+	puntoGraphics.tint(colorList[4] + hex(chiAlpha, 2));
 	puntoGraphics.image(puntoStarsGraphics, punto_r,  puntoGraphics.height * 0.8)
 	puntoGraphics.pop();
 

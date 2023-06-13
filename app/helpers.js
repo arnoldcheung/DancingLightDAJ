@@ -13,16 +13,25 @@ function toggleColorSelection() {
 	elementName.html(getTranslation('colorNameList')[currentColorSelectionIndex]);
 	elementName.style('color', colorList[currentColorSelectionIndex]);
 
-	// if(currentColorSelectionIndex == 2){
-	// 	puntoCheckbox.checked(true);
-	// } else if(currentColorSelectionIndex == 3){
-	// 	energyCheckbox.checked(true);
-	// } else if (currentColorSelectionIndex == 5){
-	// 	orbitCheckbox.checked(true); 
-	// } else if (currentColorSelectionIndex == 6){
-	// 	radiationCheckbox.checked(true); 
-	// }
+
+	resetCurrentSelected();
+
+	if(currentColorSelectionIndex == 0){
+		backgroundSlider.addClass('current-selected');
+	} else if(currentColorSelectionIndex == 1){
+		puntoSizeSlider.addClass('current-selected');
+		roundnessSlider.addClass('current-selected');
+	} else if(currentColorSelectionIndex == 2){
+		infinityNumSlider.addClass('current-selected');
+	} else if(currentColorSelectionIndex == 3){
+		waveHeightSlider.addClass('current-selected');
+	} else if (currentColorSelectionIndex == 4){
+		chiSlider.addClass('current-selected');
+	}
+
 }
+
+
 
 // function that toggles the font selection cycle ----------------------------------------------------------------------------------------
 
@@ -38,7 +47,7 @@ function toggleFontSelection() {
 function setColor(){
 	colorList[currentColorSelectionIndex] = iroP.color.hexString;
 	elementName.style('color', colorList[currentColorSelectionIndex]);
-	punto_r = 10;
+	// punto_r = 10;
 	
 	// not set generated flag to false if it is for signature
 	if(currentColorSelectionIndex != 5) { 
@@ -147,7 +156,11 @@ function createMetaTag() {
 // Event function for capturing the canvas, to be added with qr code function ----------------------------------------------------------------------------------------
 async function captureCanvas(){
 	// mainCanvas.save('universe.png');
-	mainCanvas.image(bottomBannerGraphics, 0, height - buttonMenuHeight);
+	downloadCanvas.clear();
+	downloadCanvas.image(mainCanvas, 0, 0);
+	downloadCanvas.image(bottomBannerGraphics, 0, mainCanvas.height);
+
+	// mainCanvas.image(bottomBannerGraphics, 0, height - buttonMenuHeight);
 
 	// Initialize Cloudinary
 	const cloudName = 'dfipkxvuc';
@@ -157,16 +170,28 @@ async function captureCanvas(){
 	const modal = document.getElementById('modal');
 	const modalLoadingDiv = document.getElementById('modal-loading');
 	const qrcodeDiv = document.getElementById('modal-qrcode');
-	
+	const modalTitle = document.getElementById("modal-title");
+	const modalSubtitle = document.getElementById("modal-subtitle");
+	const modalResetButton = document.getElementById("modal-reset");
+
+	// set modal text
+	if(mySignature){
+		modalTitle.innerText = getTranslation("retrieveSketchTitle", { name: mySignature });
+	} else {
+		modalTitle.innerText = getTranslation("retrieveSketchTitleNoName");
+	}
+	modalSubtitle.innerText = getTranslation("retrieveSketchSubTitle");
+	modalResetButton.innerText = getTranslation("resetInstruction");
+
 	// open modal
 	modal.classList.add('open');
 	modalLoadingDiv.style.display = "block";
 	qrcodeDiv.style.display = "none";
 	
 	// Get image data from canvas
-  const imageData = mainCanvas.canvas.toDataURL('image/png');
+ 	const imageData = downloadCanvas.canvas.toDataURL('image/png');
 
-  // Upload image to Cloudinary
+ 	 // Upload image to Cloudinary
 	const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, {
 		method: 'POST',
 		headers: {
@@ -190,7 +215,8 @@ async function captureCanvas(){
 		
 		// show the qrcode
 		modalLoadingDiv.style.display = "none";
-		qrcodeDiv.style.display = "block";
+		qrcodeDiv.style.display = "flex";
+		qrcodeDiv.style.justifyContent = "center";
 	} else {
 		console.log(await response.json());
 		throw new Error('Failed to upload image to Cloudinary');
@@ -212,12 +238,11 @@ function resetUniverse() {
 
 	colorList = [
 		'#635c47', // bg
-		'#FFFFFF', // heaven chi
-		'#43fa7a', // punto chi
 		'#5d43c4', // Punto
-		'#0021c4', // Light
+		'#143fff', // Light
 		'#f263d6', // Wave
-		'#000000'] // signature
+		'#43fa7a', // punto chi
+		'#000000']; // signature
 
 	currentColorSelectionIndex = 0;
 
@@ -288,9 +313,22 @@ function resetUniverse() {
 	resetSliders();
 	resetButtonMenu();
 
+	resetCurrentSelected();
+
+	backgroundSlider.addClass('current-selected');
+
 
 
 	// change element name back to space (colorList[0])
 	// elementName.html(colorNameList[currentColorSelectionIndex]);
 	// elementName.html(colorNameList[currentColorSelectionIndex]);
+}
+
+function resetCurrentSelected(){
+	backgroundSlider.removeClass('current-selected');
+	puntoSizeSlider.removeClass('current-selected');
+	roundnessSlider.removeClass('current-selected');
+	infinityNumSlider.removeClass('current-selected');
+	waveHeightSlider.removeClass('current-selected');
+	chiSlider.removeClass('current-selected')
 }

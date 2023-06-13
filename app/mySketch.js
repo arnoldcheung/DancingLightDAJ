@@ -1,4 +1,4 @@
-currentPixelDensity = 2;
+currentPixelDensity = 1;
 
 // Control Panel Setup ----------------------------------------------------------------------------------------
 let panelVisible = true; // boolean to check if controlPanel is currently visible
@@ -42,6 +42,8 @@ let buttonMenuHeight = 70;
 
 let bottomBannerGraphics;
 
+let downloadCanvas;
+
 // flag to show signature or not ----------------------------------------------------------------------------------------
 let signature = false;
 
@@ -67,6 +69,10 @@ let infinityWidthSlider;
 let waveHeightSlider;
 let chiSlider;
 
+// newly adsded sliders ---
+let backgroundSlider;
+let signatureSlider;
+
 // let size_slider;
 
 // let energySizeSlider;
@@ -85,6 +91,10 @@ let infinityCheckbox;
 let brushCheckbox;
 let waveCheckbox;
 let chiCheckbox;
+
+// newly adsded checkboxes ---
+let backgroundCheckbox;
+let signatureCheckbox;
 
 // let puntoCheckbox;
 // let orbitCheckbox;
@@ -126,17 +136,18 @@ let colorList = [
 	'#FFFFFF', // heaven chi
 	'#43fa7a', // punto chi
 	'#5d43c4', // Punto
-	'f', // Light
+	// 'f', // Light
 	'#f263d6', // Wave
-	'#000000'] // signature
+	'#000000']; // signature
+
+let waveChiColor = '#FFFFFF';
 
 let colorNameList = [
-	'Space',
-	'Chi 1',
-	'Chi 2',
+	'Earth',
 	'Punto',
 	'Light',
 	'Wave',
+	'Chi',
 	'Signature'];
 
 let numSelectableColors = colorList.length;
@@ -196,6 +207,9 @@ function setup() {
 	//create main canvas ----------------------------------------------------------------------------------------
 	mainCanvas = createGraphics(width, height);
 	mainCanvas.angleMode(DEGREES);
+
+	// create download Canvas ----------------------------------------------------------------------------------------
+	downloadCanvas = createGraphics(mainCanvas.width, mainCanvas.height + buttonMenuHeight);
 	
 	// // create orbit cancvas ----------------------------------------------------------------------------------------
 	// setupOrbit();
@@ -222,19 +236,22 @@ function setup() {
 	// Setup control panel ----------------------------------------------------------------------------------------
 	setupControlPanel();
 
+	setupNumberInput();
+
 	setupNameInput();
 
 	setupMessageInput();
 	
-	setupNumberInput();
-	
-	setupColorPicker();
-	
 	// Create Checkboxes ----------------------------------------------------------------------------------------
 	checkboxSetup();
-	
+
 	// Create sliders ----------------------------------------------------------------------------------------
 	sliderSetup();
+
+
+	setupColorPicker();
+	
+
 	
 	// Setup the three buttons at the bottom ----------------------------------------------------------------------------------------
 
@@ -270,12 +287,13 @@ function draw() {
 	chiAlpha = chiSlider.value();
 	// infinityWidth = infinityWidthSlider.value();
 
+	backgroundChiAlpha = backgroundSlider.value();
 
 	
 	// Star grapghics ----------------------------------------------------------------------------------------
 
 	mainCanvas.push();
-	mainCanvas.tint('#FFFFFF');
+	mainCanvas.tint('#FFFFFF' + hex(backgroundChiAlpha, 2));
 	mainCanvas.image(starsGraphics, 0, 0);
 	mainCanvas.pop();
 	
@@ -305,7 +323,7 @@ function draw() {
 	// infinity graphics ----------------------------------------------------------------------------------------
 	// if(infinityCheckbox.checked()){
 	mainCanvas.push();		
-	mainCanvas.tint(colorList[4]);
+	mainCanvas.tint(colorList[2]);
 
 	if(numBrush >= 1){
 		mainCanvas.image(brushGraphics1, 0, 0, mainCanvas.width, mainCanvas.height);
@@ -322,23 +340,29 @@ function draw() {
 	mainCanvas.pop();
 	// }
 
-	// Chi 2 grapghics ----------------------------------------------------------------------------------------
-	mainCanvas.push();
-	mainCanvas.tint(colorList[1] + hex(chiAlpha, 2));
-	waveGraphics.clear();
-	drawWave(chi=true);
-	mainCanvas.image(waveGraphics, 0, 0);	
-	mainCanvas.pop();	// }
+	// Wave Chi grapghics ----------------------------------------------------------------------------------------
+	if(waveHeight >=10 ){
+		mainCanvas.push();
+		// mainCanvas.tint('#FFFFFF' + hex(chiAlpha, 2));
+		mainCanvas.tint(waveChiColor);
+		waveGraphics.clear();
+		drawWave(chi=true);
+		mainCanvas.image(waveGraphics, 0, 0);	
+		mainCanvas.pop();	// }
+	}
 
 	
 	// signature ----------------------------------------------------------------------------------------
 	if(signature){
 		mainCanvas.push();
-		mainCanvas.fill(colorList[6]);
+		mainCanvas.fill(colorList[5]);
 		mainCanvas.textFont(currentFont);
 		mainCanvas.textAlign(RIGHT, BOTTOM);
 		mainCanvas.textSize(20);
-		mainCanvas.text(mySignature + ' @MGM', width - 10, height - 5 - buttonMenuHeight);
+
+		universeNumberDisplay = generated ? universeNumber : '';
+
+		mainCanvas.text(universeNumberDisplay + ' ' + mySignature + ' @MGM', width - 10, height - 10);
 		mainCanvas.pop();
 	}
 
@@ -346,7 +370,7 @@ function draw() {
 
 	mainCanvas.push();
 	// mainCanvas.rectMode(CORNERS);
-	mainCanvas.fill(colorList[6]);
+	mainCanvas.fill(colorList[5]);
 	mainCanvas.textFont(currentFont);
 	mainCanvas.textAlign(RIGHT, TOP);
 	mainCanvas.textSize(30);
@@ -355,15 +379,15 @@ function draw() {
 	
 	// generate universe number ----------------------------------------------------------------------------------------
 	
-	if(generated){
-		mainCanvas.push();
-		mainCanvas.fill(colorList[6]);
-		mainCanvas.textFont(currentFont);
-		mainCanvas.textAlign(CENTER, BOTTOM);
-		mainCanvas.textSize(20);
-		mainCanvas.text(universeNumber, width / 2, height - 5 - buttonMenuHeight);
-		mainCanvas.pop();
-	}
+	// if(generated){
+	// 	mainCanvas.push();
+	// 	mainCanvas.fill(colorList[6]);
+	// 	mainCanvas.textFont(currentFont);
+	// 	mainCanvas.textAlign(CENTER, BOTTOM);
+	// 	mainCanvas.textSize(20);
+	// 	mainCanvas.text(universeNumber, width / 2, height - 5 - buttonMenuHeight);
+	// 	mainCanvas.pop();
+	// }
 
 	// mainCanvas.image(bottomBannerGraphics, 0, height - buttonMenuHeight);
 		

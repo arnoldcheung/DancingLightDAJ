@@ -7,7 +7,7 @@ function drawWave(chi=false){
 	waveGraphics.push();
 	
 	if(chi == false){
-		waveGraphics.fill(colorList[5]);
+		waveGraphics.fill(colorList[3]);
 	} else if (chi == true) {
 		// print('hihihi');
 		waveGraphics.fill(255, 1);
