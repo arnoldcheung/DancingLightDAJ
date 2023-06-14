@@ -17,12 +17,12 @@ function drawWave(chi=false){
 
 	waveGraphics.noStroke();
 	waveGraphics.beginShape();
-	waveGraphics.vertex(0, waveHeight);
-	waveGraphics.vertex(0, 0);
-	waveGraphics.vertex(width, 0);
-	waveGraphics.vertex(width, waveHeight);
+	waveGraphics.vertex(-100, waveHeight);
+	waveGraphics.vertex(-100, 0);
+	waveGraphics.vertex(width + 100, 0);
+	waveGraphics.vertex(width + 100, waveHeight);
 	
-	for(var i=waveGraphics.width; i >= 0; i-=waveGraphics.width / 100){
+	for(var i=waveGraphics.width + 100; i >= -100; i-=waveGraphics.width / 100){
 		let y = waveHeight * map(noise(frameCount * 0.002, i * 0.001), 0, 1, 0.4, 1.6);
 		if(chi == true){
 			// y = y + 100;
