@@ -269,7 +269,7 @@ function draw() {
 
 	mainCanvas.push();
 	mainCanvas.blendMode(SCREEN);
-	mainCanvas.fill(255, 255, 255, 240);
+	mainCanvas.fill(255, 255, 255, 200);
 	mainCanvas.rect(0, 0, width, height);
 	mainCanvas.blendMode(BLEND);
 	mainCanvas.pop();
@@ -344,7 +344,7 @@ function draw() {
 	if(waveHeight >=10 ){
 		mainCanvas.push();
 		// mainCanvas.tint('#FFFFFF' + hex(chiAlpha, 2));
-		mainCanvas.tint(waveChiColor);
+		mainCanvas.tint(waveChiColor + hex(chiAlpha, 2));
 		waveGraphics.clear();
 		drawWave(chi=true);
 		mainCanvas.image(waveGraphics, 0, 0);	
