@@ -163,8 +163,8 @@ async function captureCanvas(){
 	// mainCanvas.image(bottomBannerGraphics, 0, height - buttonMenuHeight);
 
 	// Initialize Cloudinary
-	const cloudName = 'dfipkxvuc';
-	const unsignedUploadPreset = 'olv6o5vs';
+	const cloudName = 'dlnjyltpt';
+	const unsignedUploadPreset = 'zrrdksiz';
 
 	// get elements
 	const modal = document.getElementById('modal');
