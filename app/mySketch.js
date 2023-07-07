@@ -174,6 +174,14 @@ let exhibitionTitleDiv;
 
 function preload() {
   logo = loadImage("assets/logos/MGM 3D Logo.png");
+
+  logoImg = createImg("assets/logos/MGM_3D_Logo_Cropped.png", "Logo");
+
+  logoImg.style("height", "30%");
+  logoImg.style("margin-left", "10px"); // Add some left margin to position it from the left edge
+  // logoImg.position(0, 0)
+
+  logoImg.hide();
   
   enFont1 = loadFont("assets/fonts/FontsFree-Net-Proxima-Nova-Sbold.otf");
   enFont2 = loadFont("assets/fonts/Cinzel-ExtraBold.ttf");
@@ -183,9 +191,9 @@ function preload() {
   zhFont3 = loadFont("assets/fonts/NotoSerifJP-Medium.otf");
 
   fonts = [
-	  enFont1,
-	  enFont2,
-	  enFont3,
+	//   enFont1,
+	//   enFont2,
+	//   enFont3,
 	  zhFont1,
 	  zhFont2,
 	  zhFont3]
@@ -344,7 +352,7 @@ function draw() {
 	if(waveHeight >=10 ){
 		mainCanvas.push();
 		// mainCanvas.tint('#FFFFFF' + hex(chiAlpha, 2));
-		mainCanvas.tint(waveChiColor + hex(chiAlpha, 2));
+		mainCanvas.tint(colorList[4] + hex(chiAlpha, 2));
 		waveGraphics.clear();
 		drawWave(chi=true);
 		mainCanvas.image(waveGraphics, 0, 0);	
